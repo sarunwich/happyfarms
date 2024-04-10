@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Packaging extends Model
 {
     use HasFactory;
+    protected $fillable = ['packaging_name'];
 }

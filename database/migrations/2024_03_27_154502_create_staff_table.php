@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('picture');
+            $table->string('role');
             $table->unsignedBigInteger('farm_id')->nullable();
             $table->foreign('farm_id')->references('id')->on('farms');
             $table->timestamps();

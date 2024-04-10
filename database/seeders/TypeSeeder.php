@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Type;
 
 class TypeSeeder extends Seeder
 {
@@ -13,5 +14,12 @@ class TypeSeeder extends Seeder
     public function run(): void
     {
         //
+        $types=[
+            ['type_name'=>'ไข่ไก่']
+           
+        ];
+        foreach ($types as $key => $type) {
+            Type::create($type);
+        }
     }
 }

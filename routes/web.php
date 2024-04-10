@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\FarmController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/404', function () {
+    return view('404');
 });
 
 // Auth::routes();
@@ -43,6 +49,8 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
+    Route::get('/admin/managuser', [AdminController::class, 'managuser'])->name('admin.managuser');
+   
 });
   
 /*------------------------------------------
@@ -53,5 +61,8 @@ All Admin Routes List
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
   
     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    Route::get('/manager/farm', [ManagerController::class, 'farm'])->name('manager.farm');
+    Route::get('/manager/addfarm', [ManagerController::class, 'addfarm'])->name('manager.addfarm');
+    Route::post('/manager/farmstore', [FarmController::class, 'store'])->name('manager.farmstore');
 });
  

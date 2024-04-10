@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable = ['product_name', 'type_id', 'packaging_id','unit','size_id','recommen','information','details', 'farm_id','status'];
+
+    public function farm()
+    {
+        return $this->belongsTo(Farm::class);
+    }
+
+    public function lots()
+    {
+        return $this->hasMany(Lot::class);
+    }
 }

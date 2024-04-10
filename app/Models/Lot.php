@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Lot extends Model
 {
     use HasFactory;
+    protected $fillable = ['receive','myself', 'product_id','packing_date','Expiration_date'];
+    
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

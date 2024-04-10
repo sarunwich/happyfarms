@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products');
+            $table->integer('receive');
+            $table->integer('myself');
+            $table->date('packing_date');
+            $table->date('Expiration_date');
             $table->timestamps();
         });
     }

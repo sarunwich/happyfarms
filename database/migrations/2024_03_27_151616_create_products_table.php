@@ -18,12 +18,15 @@ return new class extends Migration
             $table->foreign('type_id')->references('id')->on('types');
             $table->unsignedBigInteger('packaging_id')->nullable();
             $table->foreign('packaging_id')->references('id')->on('packagings');
-            $table->integer('unit');
+            $table->integer('unit')->nullable();
             $table->unsignedBigInteger('size_id')->nullable();
             $table->foreign('size_id')->references('id')->on('sizes');
-            $table->text('recommen');
-            $table->text('information');
-            $table->text('details');
+            $table->text('recommen')->nullable();
+            $table->text('information')->nullable();
+            $table->text('details')->nullable();
+            $table->unsignedBigInteger('farm_id')->nullable();
+            $table->foreign('farm_id')->references('id')->on('farms');
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }
