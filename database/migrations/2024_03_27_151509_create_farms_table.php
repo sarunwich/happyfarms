@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('phone');
             $table->string('lat');
             $table->string('long');
-            $table->text('description');
+            $table->longText('description');
+            $table->longText('business_hours');
+            
             $table->string('image');
             $table->timestamps();
         });

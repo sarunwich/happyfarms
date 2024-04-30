@@ -24,23 +24,25 @@
             cursor: pointer;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('build/assets/plugins/summernote/summernote-bs4.min.css') }}">
-    <!-- CodeMirror -->
-    <link rel="stylesheet" href="{{ asset('build/assets/plugins/codemirror/codemirror.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/assets/plugins/codemirror/theme/monokai.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ asset('build/assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('build/assets/dist/css/adminlte.min.css') }}">
 @endpush
 @section('content')
+    {{ $id }}
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>เพิ่มข้อมูลฟาร์ม</h1>
+                    <h1>ข้อมูลผู้ดำเนินงานในฟาร์ม {{ $farm->name }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="../admin/home">Home</a></li>
-                        <li class="breadcrumb-item active">เพิ่มข้อมูลฟาร์ม</li>
+                        <li class="breadcrumb-item active">ข้อมูลผู้ดำเนินงานในฟาร์ม {{ $farm->name }}</li>
                     </ol>
                 </div>
             </div>
@@ -51,55 +53,36 @@
     <section class="content">
 
         <!-- Default box -->
-        <div class="card">
+        <div class="card collapsed-card">
             <div class="card-header">
-                <h3 class="card-title">Title</h3>
+                <h3 class="card-title">เพิ่มข้อมูลผู้ดำเนินงานในฟาร์ม {{ $farm->name }}</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
+                        <i class="fas fa-plus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
-            <div class="card-body">
-                <form id="quickForm" action="{{ route('manager.farmstore') }}" method="POST" enctype="multipart/form-data">
+            <div class="card-body" style="display: none;">
+                <form id="quickForm" action="{{ route('manager.adduserdb') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input name="farmid" value="{{ $id }}" type="hidden">
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="InputName">ชื่อฟาร์ม</label>
-                            <input type="text" name="Name" class="form-control" id="InputName"
-                                placeholder="กรอกข้อมูลชื่อฟาร์ม">
+                            <label for="InputName">ชื่อ</label>
+                            <input type="text" name="name" class="form-control" id="InputName"
+                                placeholder="กรอกข้อมูลชื่อ">
                         </div>
                         <div class="form-group">
                             <label for="address">ที่อยู่</label>
                             <input type="text" name="address" class="form-control" id="address"
                                 placeholder="กรอกข้อมูลที่อยู่">
                         </div>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <!-- text input -->
-                                <div class="form-group">
-                                    <label>LAT</label>
-                                    <input type="text" name="lat" id="lat" class="form-control"
-                                        placeholder="Enter ...">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Long</label>
-                                    <input type="text" name="long" id="long" class="form-control"
-                                        placeholder="Enter ...">
-                                </div>
-                            </div>
-                        </div>
-                        {{-- <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" class="form-control" id="exampleInputPassword1"
-                                placeholder="Password">
-                        </div> --}}
+
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <!-- text input -->
@@ -110,7 +93,6 @@
                                 </div>
                             </div>
                             <div class="col-sm-6">
-                                <!-- text input -->
                                 <div class="form-group">
                                     <label>ภาพ</label>
                                     <div class="custom-file">
@@ -118,26 +100,27 @@
                                             id="image">
                                         <label class="custom-file-label" for="image">Choose file</label>
                                         {{-- <input type="file" id="fileInput" >
-                                        <input type="text" id="filename" placeholder="Choose a filexx" readonly> --}}
+                                    <input type="text" id="filename" placeholder="Choose a filexx" readonly> --}}
 
 
                                     </div>
-                                    {{-- <div class="file-input">
-                                        <input type="file" id="file" name="file">
-                                        <label for="file" class="button">Choose File</label>
-                                        <span id="filename"></span>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="description">รายละเอียด</label>
-                            <textarea id="summernote" class="form-control" cols="3" name="description"></textarea>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>ตำแหน่ง/หน้าที่</label>
+                                    <input type="text" name="role" class="form-control"
+                                        placeholder="ตำแหน่ง/หน้าที่ ...">
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="description">เวลาทำการ</label>
-                            <textarea id="summernote_business_hours" class="form-control" cols="3" name="business_hours"></textarea>
-                        </div>
+
+
+
+
+
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -152,7 +135,76 @@
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">ข้อมูลผู้ดำเนินงานในฟาร์ม {{ $farm->name }}</h3>
 
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>ชื่อ</th>
+                            <th scope="col">ตำแหน่ง</th>
+                            <th scope="col">เบอร์โทร</th>
+                            <th scope="col">ที่อยู่</th>
+                            <th scope="col">จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($farm->staffs as $key => $staff)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>
+                                    {{-- {{ $staff->picture }} --}}
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar"
+                                                src="{{ asset('storage/picture/' . $staff->picture) }}">
+                                        </li>
+                                    </ul>
+
+                                </td>
+                                <td> {{ $staff->name }}</td>
+                                <td> {{ $staff->role }}</td>
+                                <td> {{ $staff->phone }}</td>
+                                <td> {{ $staff->address }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-sm"
+                                        onclick="window.location='{{ route('manager.editstaff', ['id' => $staff->id]) }}'"
+                                        href="#">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <form id="delete-form-{{ $staff->id }}"
+                                        action="{{ route('staff.destroy', ['id' => $staff->id, 'farm_id' => $farm->id]) }}"
+                                        method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="button" onclick="confirmDelete('{{ $staff->id }}')"
+                                            class="btn btn-danger btn-sm"> <i class="fas fa-trash">
+                                            </i>Delete</button>
+                                    </form>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
     <!-- /.content -->
 @endsection
@@ -160,25 +212,66 @@
     <script src="{{ asset('build/assets/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('build/assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <!-- Summernote -->
-<script src="{{ asset('build/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- CodeMirror -->
-<script src="{{ asset('build/assets/plugins/codemirror/codemirror.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/css/css.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/xml/xml.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+    <!-- jQuery -->
+    {{-- <script src="{{ asset('build/assets/plugins/jquery/jquery.min.js') }}"></script> --}}
+    <!-- Bootstrap 4 -->
+    <script src="{{ asset('build/assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- AdminLTE App -->
+    <script src="{{ asset('build/assets/dist/js/adminlte.min.js') }}"></script>
+    {{-- <script src="{{ asset('build/assets/dist/js/demo.js')}}"></script> --}}
     <script>
+        function confirmDelete(id) {
+
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete-form-' + id).submit();
+                    // Swal.fire({
+                    //     title: "Deleted!",
+                    //     text: "Your file has been deleted.",
+                    //     icon: "success"
+                    // });
+                }
+            });
+
+            // Swal.fire({
+            //         title: "Are you sure?",
+            //         text: "Once deleted, you will not be able to recover this user!",
+            //         icon: "warning",
+            //         buttons: ["Cancel", "Delete"],
+            //         dangerMode: true,
+            //     })
+            //     .then((willDelete) => {
+            //         if (willDelete) {
+            //             document.getElementById('delete-form-' + id).submit();
+            //         } else {
+            //             Swal.fire("Your user is safe!", {
+            //                 icon: "success",
+            //             });
+            //         }
+            //     });
+        }
+
+        // Handle success response
+        @if (session('success'))
+            // Swal.fire("Success!", "{{ session('success') }}", "success");
+            Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+        @endif
+
+
+
         $(function() {
-            // Summernote
-            $('#summernote').summernote( height: 350,)
-            $('#summernote_business_hours').summernote()
-            // CodeMirror
-            // CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-            //     mode: "htmlmixed",
-            //     theme: "monokai"
-            // });
-            //   })
-            //         $(function() {
             $.validator.setDefaults({
                 submitHandler: function(form) {
                     // alert("Form successful submitted!");
@@ -193,7 +286,7 @@
                         processData: false,
                         success: function(response) {
                             // Handle success response using SweetAlert
-                            // console.log(response);
+                            console.log(response);
                             // alert("Form successful submitted!");
                             Swal.fire({
                                 title: 'Success!',
@@ -203,7 +296,8 @@
                                 // Redirect to index page after the user clicks OK in SweetAlert
                                 if (result.isConfirmed || result.isDismissed) {
                                     window.location.href =
-                                        '/manager/farm'; // Replace '/index' with your actual index page URL
+                                        '/manager/adduser/' + response
+                                        .id; // Replace '/index' with your actual index page URL
                                 }
                             });
                         },
@@ -236,19 +330,14 @@
             }, "Please specify a valid phone number");
             $('#quickForm').validate({
                 rules: {
-                    Name: {
+                    name: {
                         required: true,
                     },
                     address: {
                         required: true,
 
                     },
-                    lat: {
-                        required: true
-                    },
-                    long: {
-                        required: true
-                    },
+
                     phone: {
                         required: true,
                         phoneUS: true
@@ -258,27 +347,17 @@
                         accept: "image/*", // Ensure the file is an image
                         imageSize: true // Custom validation for image size
                     },
-                    description: {
-                        required: true,
-                    },
-                    business_hours:{
+                    role: {
                         required: true,
                     },
                 },
                 messages: {
-                    Name: {
-                        required: "กรุณากรอกชื่อฟาร์ม",
+                    name: {
+                        required: "กรุณากรอกชื่อ",
                     },
                     address: {
                         required: "กรุณากรอกที่อยู่",
                     },
-                    lat: {
-                        required: "กรุณากรอกข้อมูล ละติจูด",
-                    },
-                    long: {
-                        required: "กรุณากรอกข้อมูล ลองติจูด",
-                    },
-
                     phone: {
                         required: "กรุณากรอกหมายเลขโทรศัพท์",
                         phoneUS: "Please enter a valid US phone number (10 digits)"
@@ -288,9 +367,10 @@
                         accept: "Please select a valid image file",
                         imageSize: "Please select an image smaller than 5 MB."
                     },
-                    description: {
-                        required: "กรุณากรอกรายละเอียด",
-                    }
+                    role: {
+                        required: "กรุณาระบุตำแหน่ง/หน้าที่",
+                    },
+
 
                 },
                 errorElement: 'span',
@@ -305,6 +385,7 @@
                     $(element).removeClass('is-invalid');
                 }
             });
+
         });
         $('#image').on('change', function(e) {
             //get the file name
@@ -313,12 +394,5 @@
             //replace the "Choose a file" label
             $(this).next('.custom-file-label').html(fileName);
         })
-        // $(document).ready(function() {
-        //     $('#fileInput').change(function() {
-        //         var filename = $(this).val().split('\\').pop();
-        //         document.getElementByID('fileInput').style.display = "none";
-        //         $('#filename').val(filename);
-        //     });
-        // });
     </script>
 @endpush

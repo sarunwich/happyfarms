@@ -37,12 +37,14 @@
       </div>
       <div class="card-body">
         
-        <table class="table mt-3">
+        <table class="table table-striped projects">
           <thead>
               <tr>
                   <th>#</th>
+                  <th>ภาพ</th>
                   <th>ชื่อ</th>
-                  {{-- <th scope="col">สถานะ</th> --}}
+                  <th scope="col">จัดการ</th>
+                  <th scope="col">สถานะ</th>
               </tr>
           </thead>
           <tbody>
@@ -50,8 +52,23 @@
                   <tr>
                       <td scope="row">
                           {{ ($farms->currentPage() - 1) * $farms->perPage() + $loop->iteration }}</td>
-                      {{-- <td>{{ $farm->image }}</td> --}}
+                      <td>
+                        {{-- {{ $farm->image }} --}}
+                        <img src="{{ asset('storage/images/'.$farm->image) }}" width="100px"></td>
                       <td>{{ $farm->name }}</td>
+                      <td class="project-actions text-right">
+                        <a class="btn btn-primary btn-sm" onclick="window.location='{{ route('manager.viewfarm',['id' => $farm->id]) }}'" href="#">
+                          <i class="fas fa-folder">
+                          </i>
+                          View
+                      </a>
+                      <a class="btn btn-info btn-sm" onclick="window.location='{{ route('manager.viewfarm',['id' => $farm->id]) }}'" href="#">
+                          <i class="fas fa-pencil-alt">
+                          </i>
+                          Edit
+                      </a>
+                        {{-- <button type="button" onclick="window.location='{{ route('manager.viewfarm',['id' => $farm->id]) }}'" class="btn btn-block btn-outline-info">ดู/แก้ไข</button> --}}
+                      </td>
                   </tr>
               @endforeach
           </tbody>

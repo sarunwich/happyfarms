@@ -185,10 +185,29 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../kanban.html" class="nav-link">
-                                <i class="nav-icon fas fa-columns"></i>
+                            <a href="{{route('manager.users')}}" class="nav-link {{Route::is('manager.users') ? 'active' : ''}}">
+                                <i class="nav-icon fas fa-users"></i>
+                                {{-- <i class="fa-solid fa-users-gear"></i> --}}
                                 <p>
-                                    มอบหมายผู้จัดการระบบ
+                                    ผู้ดำเนินงานในฟาร์ม
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('manager.product')}}" class="nav-link {{Route::is('manager.product') ? 'active' : ''}}">
+                                <i class="nav-icon fa fa-shopping-cart"></i>
+                                {{-- <i class="fa-solid fa-users-gear"></i> --}}
+                                <p>
+                                    สินค้า
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{route('manager.lot')}}" class="nav-link {{Route::is('manager.lot') ? 'active' : ''}}">
+                                <i class="nav-icon fa fa-cogs"></i>
+                                {{-- <i class="fa-solid fa-users-gear"></i> --}}
+                                <p>
+                                    รอบการผลิต
                                 </p>
                             </a>
                         </li>

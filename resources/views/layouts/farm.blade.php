@@ -16,6 +16,7 @@
     <meta content="" name="description">
 
     @include('include.head')
+    @stack('style')
 </head>
 
 <body>
@@ -56,6 +57,7 @@
 
     <!-- JavaScript Libraries -->
     @include('include.footerjs')
+    @stack('scripts')
 </body>
 
 </html>

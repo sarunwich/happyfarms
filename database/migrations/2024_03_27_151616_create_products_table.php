@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
+            $table->string('picture',255);
             $table->unsignedBigInteger('type_id')->nullable();
             $table->foreign('type_id')->references('id')->on('types');
             $table->unsignedBigInteger('packaging_id')->nullable();
@@ -21,9 +22,9 @@ return new class extends Migration
             $table->integer('unit')->nullable();
             $table->unsignedBigInteger('size_id')->nullable();
             $table->foreign('size_id')->references('id')->on('sizes');
-            $table->text('recommen')->nullable();
-            $table->text('information')->nullable();
-            $table->text('details')->nullable();
+            $table->longText('recommen')->nullable();
+            $table->longText('information')->nullable();
+            $table->longText('details')->nullable();
             $table->unsignedBigInteger('farm_id')->nullable();
             $table->foreign('farm_id')->references('id')->on('farms');
             $table->tinyInteger('status')->nullable();

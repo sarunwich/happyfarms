@@ -35,12 +35,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>เพิ่มข้อมูลฟาร์ม</h1>
+                    <h1>ข้อมูลฟาร์ม</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="../admin/home">Home</a></li>
-                        <li class="breadcrumb-item active">เพิ่มข้อมูลฟาร์ม</li>
+                        <li class="breadcrumb-item active">ข้อมูลฟาร์ม</li>
                     </ol>
                 </div>
             </div>
@@ -53,7 +53,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Title</h3>
+                <h3 class="card-title">{{$farm->id}}</h3>
 
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -65,17 +65,18 @@
                 </div>
             </div>
             <div class="card-body">
-                <form id="quickForm" action="{{ route('manager.farmstore') }}" method="POST" enctype="multipart/form-data">
+                <form id="quickForm" action="{{ route('manager.farmupdate', $farm->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="card-body">
                         <div class="form-group">
                             <label for="InputName">ชื่อฟาร์ม</label>
-                            <input type="text" name="Name" class="form-control" id="InputName"
+                            <input type="text" name="Name" class="form-control" value="{{$farm->name}}" id="InputName"
                                 placeholder="กรอกข้อมูลชื่อฟาร์ม">
                         </div>
                         <div class="form-group">
                             <label for="address">ที่อยู่</label>
-                            <input type="text" name="address" class="form-control" id="address"
+                            <input type="text" name="address" class="form-control" id="address" value="{{$farm->address}}"
                                 placeholder="กรอกข้อมูลที่อยู่">
                         </div>
                         <div class="row">
@@ -83,14 +84,14 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>LAT</label>
-                                    <input type="text" name="lat" id="lat" class="form-control"
+                                    <input type="text" name="lat" id="lat" value="{{$farm->lat}}" class="form-control"
                                         placeholder="Enter ...">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Long</label>
-                                    <input type="text" name="long" id="long" class="form-control"
+                                    <input type="text" name="long" id="long" value="{{$farm->long}}" class="form-control"
                                         placeholder="Enter ...">
                                 </div>
                             </div>
@@ -105,7 +106,7 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>เบอร์โทร</label>
-                                    <input type="text" name="phone" class="form-control" maxlength="10"
+                                    <input type="text" name="phone" class="form-control" value="{{$farm->phone}}" maxlength="10"
                                         placeholder="เบอร์โทร ...">
                                 </div>
                             </div>
@@ -113,7 +114,10 @@
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>ภาพ</label>
+                                    {{-- {{$farm->image}} --}}
+                                    
                                     <div class="custom-file">
+                                        <img src="{{ asset('storage/images/'.$farm->image) }}" width="200px">
                                         <input type="file" accept="image/*" class="custom-file-input" name="image"
                                             id="image">
                                         <label class="custom-file-label" for="image">Choose file</label>
@@ -132,12 +136,22 @@
                         </div>
                         <div class="form-group">
                             <label for="description">รายละเอียด</label>
-                            <textarea id="summernote" class="form-control" cols="3" name="description"></textarea>
+                            <textarea id="summernote" class="form-control" cols="3" name="description">{{$farm->description}}</textarea>
                         </div>
+                        {{-- <div class="form-group mb-0">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="terms" class="custom-control-input" id="exampleCheck1">
+                                <label class="custom-control-label" for="exampleCheck1">I agree to the <a
+                                        href="#">terms of service</a>.</label>
+                            </div>
+                        </div> --}}
                         <div class="form-group">
                             <label for="description">เวลาทำการ</label>
-                            <textarea id="summernote_business_hours" class="form-control" cols="3" name="business_hours"></textarea>
+                            <textarea id="summernote_business_hours" class="form-control" cols="3" name="business_hours">{{$farm->business_hours}}</textarea>
                         </div>
+
+
+                        
                     </div>
                     <!-- /.card-body -->
                     <div class="card-footer">
@@ -161,17 +175,21 @@
     <script src="{{ asset('build/assets/plugins/jquery-validation/additional-methods.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Summernote -->
-<script src="{{ asset('build/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
-<!-- CodeMirror -->
-<script src="{{ asset('build/assets/plugins/codemirror/codemirror.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/css/css.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/xml/xml.js')}}"></script>
-<script src="{{ asset('build/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+    <script src="{{ asset('build/assets/plugins/summernote/summernote-bs4.min.js') }}"></script>
+    <!-- CodeMirror -->
+    <script src="{{ asset('build/assets/plugins/codemirror/codemirror.js') }}"></script>
+    <script src="{{ asset('build/assets/plugins/codemirror/mode/css/css.js') }}"></script>
+    <script src="{{ asset('build/assets/plugins/codemirror/mode/xml/xml.js') }}"></script>
+    <script src="{{ asset('build/assets/plugins/codemirror/mode/htmlmixed/htmlmixed.js') }}"></script>
     <script>
         $(function() {
             // Summernote
-            $('#summernote').summernote( height: 350,)
-            $('#summernote_business_hours').summernote()
+            $('#summernote').summernote({
+                height: 350,
+            })
+            $('#summernote_business_hours').summernote({
+                
+            })
             // CodeMirror
             // CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
             //     mode: "htmlmixed",
@@ -202,8 +220,9 @@
                             }).then((result) => {
                                 // Redirect to index page after the user clicks OK in SweetAlert
                                 if (result.isConfirmed || result.isDismissed) {
-                                    window.location.href =
-                                        '/manager/farm'; // Replace '/index' with your actual index page URL
+                                    location.reload();
+                                //     window.location.href =
+                                //         '/manager/farm'; // Replace '/index' with your actual index page URL
                                 }
                             });
                         },
@@ -252,12 +271,13 @@
                     phone: {
                         required: true,
                         phoneUS: true
-                    },
-                    image: {
-                        required: true,
-                        accept: "image/*", // Ensure the file is an image
-                        imageSize: true // Custom validation for image size
-                    },
+                    }
+                    ,
+                    // image: {
+                    //     required: true,
+                    //     accept: "image/*", // Ensure the file is an image
+                    //     imageSize: true // Custom validation for image size
+                    // },
                     description: {
                         required: true,
                     },
