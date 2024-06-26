@@ -100,4 +100,14 @@ class LotController extends Controller
     {
         //
     }
+    public function printData(Request $request)
+    {
+        // $selectedIds = $request->input('selected');
+        $selectedData=$request->input('selected');
+        $lot_id=$request->input('lot_id');
+        // $selectedData = YourModel::whereIn('id', $selectedIds)->get();
+
+        // Handle printing logic (e.g., pass to a view or generate a PDF)
+         return view('manager.print', compact('selectedData','lot_id'));
+    }
 }

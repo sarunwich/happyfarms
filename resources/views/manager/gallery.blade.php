@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>ข้อมูลผู้ดำเนินงานในฟาร์ม</h1>
+                    <h1>ข้อมูลรอบการผลิตสินค้าในฟาร์ม</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="../admin/home">Home</a></li>
-                        <li class="breadcrumb-item active">ข้อมูลผู้ดำเนินงานในฟาร์ม</li>
+                        <li class="breadcrumb-item"><a href="../manager/home">Home</a></li>
+                        <li class="breadcrumb-item active">ข้อมูลรอบการผลิตสินค้าในฟาร์ม</li>
                     </ol>
                 </div>
             </div>
@@ -43,13 +43,12 @@
                             <th>#</th>
                             {{-- <th>ภาพ</th> --}}
                             <th>ชื่อฟาร์ม</th>
-                            <th>ชื่อผู้ดำเนินงาน</th>
+                            {{-- <th>ชื่อผู้ดำเนินงาน</th> --}}
                             <th scope="col">จัดการ</th>
                            
                         </tr>
                     </thead>
                     <tbody>
-                        
                         @foreach ($farms as $farm)
                             <tr>
                                 <td scope="row">
@@ -58,8 +57,7 @@
                                 {{-- {{ $farm->image }} --}}
                                 {{-- <img src="{{ asset('storage/images/'.$farm->image) }}" width="100px"></td> --}}
                                 <td>{{ $farm->name }}</td>
-                                <td>
-                                    {{-- @dd($farm->staffs) --}}
+                                {{-- <td>
                                     @foreach ($farm->staffs as $staff)
                                     <ul class="list-inline">
                                       <li class="list-inline-item">
@@ -70,16 +68,21 @@
                                   </ul>
                                        
                                     @endforeach
-                                </td>
+                                </td> --}}
                                 <td>
                                   {{-- <button type="button"
                                         onclick="window.location='{{ route('manager.adduser', ['id' => $farm->id]) }}'"
                                         class="btn btn-block btn-outline-info"><i class="fas fa-plus"></i>เพิ่ม</button> --}}
-                                        <a class="btn btn-info btn-sm" onclick="window.location='{{ route('manager.adduser', ['id' => $farm->id]) }}'" href="#">
+                                        {{-- <a class="btn btn-info btn-sm" onclick="window.location='{{ route('manager.adduser', ['id' => $farm->id]) }}'" href="#">
                                           <i class="fas fa-plus">
                                           </i>
                                           Add
-                                      </a>
+                                      </a> --}}
+                                      <a class="btn btn-primary btn-sm" href="{{ route('manager.pictures.index', ['fid' => $farm->id]) }}">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        View
+                                    </a>
                                   
                                         {{-- <button type="button"
                                         onclick="window.location='{{ route('manager.viewfarm', ['id' => $farm->id]) }}'"

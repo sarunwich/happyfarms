@@ -85,3 +85,47 @@
     </section>
     <!-- /.content -->
 @endsection
+@push('scripts')
+<script>
+function upstatustype(id) {
+
+    var status = document.getElementById("status" + id);
+    var st = status.value;
+      //alert(id);
+    // var status = 0;
+    // if (checkBox.checked == true) {
+
+    //     status = 1;
+    // } else {
+
+    //     status = 0;
+    // }
+    $.ajax({
+        url: "{{ url('/admin/UpstatusType') }}",
+        method: 'post',
+        data: {
+            "_token": "{{ csrf_token() }}",
+            id: id,
+            type: parseInt(st),
+        },
+        success: function(result) {
+            console.log(result);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 2500
+            }).then(function() {
+                        // window.location = "redirectURL";
+                        // window.setTimeout(function() {}, 1500);
+                        location.reload();
+                    });
+            // window.setTimeout(function(){ } ,5500);
+            //     location.reload();
+        }
+    });
+
+}
+</script>
+@endpush

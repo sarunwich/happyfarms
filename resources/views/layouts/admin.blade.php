@@ -12,6 +12,7 @@
     <!-- Google Font: Source Sans Pro -->
     @include('include.admin.head')
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -19,6 +20,7 @@
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    @stack('style')
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -168,7 +170,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../gallery.html" class="nav-link">
+                            <a href="{{route('admin.farm')}}" class="nav-link">
                                 <i class="nav-icon far fa-image"></i>
                                 <p>
                                     ข้อมูลฟาร์ม
@@ -176,7 +178,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../kanban.html" class="nav-link">
+                            <a href="{{route('admin.farm')}}" class="nav-link">
                                 <i class="nav-icon fas fa-columns"></i>
                                 <p>
                                     มอบหมายผู้จัดการระบบ
@@ -199,6 +201,7 @@
         <!-- /.content-wrapper -->
 
         @include('include.admin.footer')
+        @stack('scripts')
 </body>
 
 </html>

@@ -185,6 +185,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{route('manager.gallery')}}" class="nav-link {{Route::is('manager.gallery') ? 'active' : ''}}">
+                                <i class="nav-icon far fa-image"></i>
+                                <p>
+                                    เพิ่มข้อมูลภาพฟาร์ม
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{route('manager.users')}}" class="nav-link {{Route::is('manager.users') ? 'active' : ''}}">
                                 <i class="nav-icon fas fa-users"></i>
                                 {{-- <i class="fa-solid fa-users-gear"></i> --}}

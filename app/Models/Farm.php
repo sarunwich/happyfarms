@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Farm extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'address','phone','lat','long','description','business_hours','image'];
+    protected $fillable = ['name', 'address', 'phone', 'lat', 'long', 'description', 'business_hours', 'image'];
 
     public function products()
     {
@@ -19,8 +19,16 @@ class Farm extends Model
     {
         return $this->hasMany(Staff::class);
     }
+    public function staffstf()
+    {
+        return $this->hasMany(Farm_Staff::class );
+    }
     // public function lot()
     // {
     //     return $this->hasMany(Lot::class);
     // }
+    public function pictures()
+    {
+        return $this->hasMany(Picture::class);
+    }
 }

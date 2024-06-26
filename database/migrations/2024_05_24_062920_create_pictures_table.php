@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('farm__staff', function (Blueprint $table) {
+        Schema::create('pictures', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('farm_id')->index();
-            $table->foreign('farm_id')->references('id')->on('farms')->onDelete('cascade');
+            $table->unsignedBigInteger('farm_id');
+            $table->string('title')->nullable();
+            $table->string('image_path');
             $table->timestamps();
+            $table->foreign('farm_id')->references('id')->on('farms')->onDelete('cascade');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('farm__staff');
+        Schema::dropIfExists('pictures');
     }
 };

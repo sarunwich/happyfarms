@@ -10,6 +10,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ViewfarmController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LotController;
+use App\Http\Controllers\PictureController;
 use App\Models\Farm;
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +62,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
   
     Route::get('/admin/home', [HomeController::class, 'adminHome'])->name('admin.home');
     Route::get('/admin/managuser', [AdminController::class, 'managuser'])->name('admin.managuser');
+    Route::post('admin/UpstatusType', [AdminController::class, 'UpstatusType']);
+    Route::get('/admin/farm', [AdminController::class, 'farm'])->name('admin.farm');
+    Route::get('/admin/addmanager', [AdminController::class, 'addmanager'])->name('admin.addmanager');
+    Route::get('autocomplete', [AdminController::class, 'autocomplete'])->name('autocomplete');
+    Route::put('/admin/{id}', [FarmController::class, 'managerfarm'])->name('admin.managerfarm');
    
 });
   
@@ -93,6 +99,14 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/manager/viewlot/{id}', [ManagerController::class, 'viewlot'])->name('manager.viewlot');
     Route::post('/manager/addlotdb', [LotController::class, 'store'])->name('manager.addlotdb');
     Route::get('/manager/qrcode/{id}', [LotController::class, 'show'])->name('manager.qrcode');
+    Route::post('/print', [LotController::class, 'printData'])->name('data.print');
+    
+
+    Route::get('/manager/gallery', [ManagerController::class, 'gallery'])->name('manager.gallery');
+    Route::get('/manager/pictures/{fid}', [PictureController::class, 'index'])->name('manager.pictures.index');
+    Route::get('/pictures/create', [PictureController::class, 'create'])->name('pictures.create');
+    Route::post('/pictures', [PictureController::class, 'store'])->name('pictures.store');
+    Route::delete('/pictures/{picture}', [PictureController::class, 'destroy'])->name('pictures.destroy');
    
 });
  

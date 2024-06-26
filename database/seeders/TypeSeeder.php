@@ -15,7 +15,9 @@ class TypeSeeder extends Seeder
     {
         //
         $types=[
-            ['type_name'=>'ไข่ไก่']
+            ['type_name'=>'ไข่ไก่',
+            'classifier'=>'แผง'
+            ]
            
         ];
         foreach ($types as $key => $type) {

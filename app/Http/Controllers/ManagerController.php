@@ -121,4 +121,14 @@ class ManagerController extends Controller
         // dd($lots);
         return view('manager.viewlot',compact('products','id','lots'));
     }
+    public function gallery()
+    {
+        $farms=Farm::join('farm__staff','farm__staff.farm_id','farms.id')
+        ->select('farms.*')
+        ->where('farm__staff.user_id', '=', Auth::user()->id)
+        ->orderBy('farms.id', 'desc')
+    
+        ->paginate(10);
+        return view('manager.gallery',compact('farms'));
+    }
 }

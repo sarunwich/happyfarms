@@ -157,7 +157,7 @@
                                     <input type="number" id="numproduct" name="numproduct" value="0"
                                         class="form-control" placeholder="จำนวน ...">
                                 </div> --}}
-                                <input type="hidden" name="unit" value="{{ $products->unit }}">
+                                <input type="hidden" id="unit" name="unit" value="{{ $products->unit }}">
                                 <div class="form-group">
                                     <label for="exampleInputFile">จำนวนสินค้า {{ $products->unit }}
                                         {{ $products->type->classifier }} /
@@ -398,10 +398,11 @@ QRCode
 
             var value1 = parseInt(input1.value) || 0; // Parse input1 value to integer or default to 0
             var value2 = parseInt(input2.value) || 0; // Parse input2 value to integer or default to 0
+            var unit = parseInt(input5.value) || 0; // Parse input2 value to integer or default to 0
 
             // Calculate the sum
             var sum = value1 + value2;
-            var total = sum / input5;
+            var total = sum / unit;
             // Update input3 with the sum
             input3.value = sum;
             input4.value = Math.floor(total);
